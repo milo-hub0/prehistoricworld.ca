@@ -485,6 +485,7 @@
       border-radius: 10px;
       overflow: hidden;
       position: relative;
+      cursor: zoom-in;
     }
     .gallery-item.tall  { aspect-ratio: 3/4; }
     .gallery-item.wide  { grid-column: span 2; aspect-ratio: 16/9; }
@@ -769,6 +770,100 @@
       }
       .carousel-slides { transition: none; }
     }
+
+    /* ── LIGHTBOX ──────────────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(5, 10, 5, 0.95);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lb-stage {
+      position: relative;
+      max-width: 92vw;
+      max-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lb-img {
+      max-width: 92vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+      animation: lbFadeIn 0.25s ease;
+    }
+
+    @keyframes lbFadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .lb-close {
+      position: fixed;
+      top: 20px; right: 24px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      z-index: 10001;
+    }
+    .lb-close:hover { background: rgba(255,255,255,0.22); }
+
+    .lb-prev, .lb-next {
+      position: fixed;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      z-index: 10001;
+    }
+    .lb-prev { left: 16px; }
+    .lb-next { right: 16px; }
+    .lb-prev:hover, .lb-next:hover { background: rgba(245,166,35,0.35); }
+    .lb-prev:focus-visible, .lb-next:focus-visible, .lb-close:focus-visible {
+      outline: 2px solid var(--lime-lt); outline-offset: 3px;
+    }
+
+    .lb-caption {
+      margin-top: 16px;
+      font-size: 14px;
+      color: rgba(247,240,224,0.7);
+      text-align: center;
+      max-width: 600px;
+      padding: 0 16px;
+    }
+
+    .lb-counter {
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--amber);
+      letter-spacing: 0.08em;
+    }
   </style>
 </head>
 <body>
@@ -939,52 +1034,52 @@
       <h2 class="section-heading" id="gallery-heading" style="margin-bottom:48px;">Meet Some of the Residents</h2>
 
       <div class="gallery-grid">
-        <div class="gallery-item wide">
+        <div class="gallery-item wide" data-index="0" role="button" tabindex="0" aria-label="View full image: Stone trail with dinosaur statues">
           <img src="Prehistoric+World+Ontario.webp"
                alt="Two large dinosaur statues flanking the stone trail at Prehistoric World, with informational plaques"
                loading="lazy">
         </div>
-        <div class="gallery-item tall">
+        <div class="gallery-item tall" data-index="1" role="button" tabindex="0" aria-label="View full image: T-Rex statue">
           <img src="img_9577.webp"
                alt="A life-size handcrafted T-Rex statue rising above the treeline"
                loading="lazy">
         </div>
-        <div class="gallery-item tall">
+        <div class="gallery-item tall" data-index="2" role="button" tabindex="0" aria-label="View full image: Triceratops statue">
           <img src="img_9576.webp"
                alt="A painted Triceratops statue on the woodland trail"
                loading="lazy">
         </div>
-        <div class="gallery-item tall">
+        <div class="gallery-item tall" data-index="3" role="button" tabindex="0" aria-label="View full image: Spinosaurus statue">
           <img src="img_9564.webp"
                alt="A striking black and orange Spinosaurus statue"
                loading="lazy">
         </div>
-        <div class="gallery-item tall">
+        <div class="gallery-item tall" data-index="4" role="button" tabindex="0" aria-label="View full image: Ankylosaur statue">
           <img src="img_9548.webp"
                alt="An armoured Ankylosaur statue along the forest path"
                loading="lazy">
         </div>
-        <div class="gallery-item wide">
+        <div class="gallery-item wide" data-index="5" role="button" tabindex="0" aria-label="View full image: Brontosaurus path">
           <img src="Dinosaur+world.webp"
                alt="The stone path stretching through the park with Brontosaurus statues on either side"
                loading="lazy">
         </div>
-        <div class="gallery-item tall">
+        <div class="gallery-item tall" data-index="6" role="button" tabindex="0" aria-label="View full image: Woolly Mammoth statue">
           <img src="img_9588.webp"
                alt="A Woolly Mammoth statue with large tusks standing among the trees"
                loading="lazy">
         </div>
-        <div class="gallery-item tall">
+        <div class="gallery-item tall" data-index="7" role="button" tabindex="0" aria-label="View full image: Prehistoric rhinoceros statue">
           <img src="img_9598.webp"
                alt="A large prehistoric rhinoceros statue in the woods"
                loading="lazy">
         </div>
-        <div class="gallery-item sqr">
+        <div class="gallery-item sqr" data-index="8" role="button" tabindex="0" aria-label="View full image: Green Brontosaurus statue">
           <img src="img_9527.webp"
                alt="A large green Brontosaurus statue in an open grassy clearing"
                loading="lazy">
         </div>
-        <div class="gallery-item sqr">
+        <div class="gallery-item sqr" data-index="9" role="button" tabindex="0" aria-label="View full image: Grey Brontosaurus statue">
           <img src="img_9581.webp"
                alt="A massive grey Brontosaurus statue in a forest clearing"
                loading="lazy">
@@ -1148,6 +1243,18 @@
     <!-- ── CLOSING CTA ────────────────────────────────── -->
   </main>
 
+  <!-- ── LIGHTBOX ──────────────────────────────────────── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+    <button class="lb-close" id="lbClose" aria-label="Close image viewer">&#10005;</button>
+    <button class="lb-prev"  id="lbPrev"  aria-label="Previous image">&#10094;</button>
+    <button class="lb-next"  id="lbNext"  aria-label="Next image">&#10095;</button>
+    <div class="lb-stage" id="lbStage">
+      <img class="lb-img" id="lbImg" src="" alt="">
+    </div>
+    <p class="lb-caption" id="lbCaption"></p>
+    <p class="lb-counter" id="lbCounter"></p>
+  </div>
+
   <!-- ── FOOTER ─────────────────────────────────────── -->
   <footer>
     <p>
@@ -1271,6 +1378,94 @@
     cw.addEventListener('mouseleave', startAuto);
 
     startAuto();
+
+    // ── LIGHTBOX ────────────────────────────────────────
+    const lbImages = [
+      { src: 'Prehistoric+World+Ontario.webp', alt: 'Stone trail with dinosaur statues at Prehistoric World' },
+      { src: 'img_9577.webp',                  alt: 'Life-size handcrafted T-Rex statue' },
+      { src: 'img_9576.webp',                  alt: 'Painted Triceratops statue on the woodland trail' },
+      { src: 'img_9564.webp',                  alt: 'Black and orange Spinosaurus statue' },
+      { src: 'img_9548.webp',                  alt: 'Armoured Ankylosaur statue along the forest path' },
+      { src: 'Dinosaur+world.webp',            alt: 'Stone path with Brontosaurus statues on either side' },
+      { src: 'img_9588.webp',                  alt: 'Woolly Mammoth statue with large tusks' },
+      { src: 'img_9598.webp',                  alt: 'Prehistoric rhinoceros statue in the woods' },
+      { src: 'img_9527.webp',                  alt: 'Green Brontosaurus statue in an open grassy clearing' },
+      { src: 'img_9581.webp',                  alt: 'Massive grey Brontosaurus statue in a forest clearing' },
+    ];
+
+    const lightbox   = document.getElementById('lightbox');
+    const lbImg      = document.getElementById('lbImg');
+    const lbCaption  = document.getElementById('lbCaption');
+    const lbCounter  = document.getElementById('lbCounter');
+    let   lbCurrent  = 0;
+    let   lbPrevFocus = null;
+
+    function lbOpen(index) {
+      lbCurrent  = index;
+      lbPrevFocus = document.activeElement;
+      lbShow();
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lbClose').focus();
+    }
+
+    function lbClose() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lbPrevFocus) lbPrevFocus.focus();
+    }
+
+    function lbShow() {
+      const item   = lbImages[lbCurrent];
+      lbImg.src    = item.src;
+      lbImg.alt    = item.alt;
+      lbCaption.textContent = item.alt;
+      lbCounter.textContent = (lbCurrent + 1) + ' / ' + lbImages.length;
+      // re-trigger animation
+      lbImg.style.animation = 'none';
+      lbImg.offsetHeight;
+      lbImg.style.animation = '';
+    }
+
+    function lbGo(dir) {
+      lbCurrent = (lbCurrent + dir + lbImages.length) % lbImages.length;
+      lbShow();
+    }
+
+    // Open on gallery item click or Enter/Space
+    document.querySelectorAll('.gallery-item[data-index]').forEach(el => {
+      el.addEventListener('click',   () => lbOpen(+el.dataset.index));
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); lbOpen(+el.dataset.index); }
+      });
+    });
+
+    document.getElementById('lbClose').addEventListener('click', lbClose);
+    document.getElementById('lbPrev').addEventListener('click',  () => lbGo(-1));
+    document.getElementById('lbNext').addEventListener('click',  () => lbGo(1));
+
+    // Click backdrop to close
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) lbClose(); });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape')     lbClose();
+      if (e.key === 'ArrowLeft')  lbGo(-1);
+      if (e.key === 'ArrowRight') lbGo(1);
+    });
+
+    // Touch swipe support
+    let lbTouchX = null;
+    lightbox.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+    lightbox.addEventListener('touchend',   e => {
+      if (lbTouchX === null) return;
+      const diff = lbTouchX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) lbGo(diff > 0 ? 1 : -1);
+      lbTouchX = null;
+    });
   </script>
 
 </body>
