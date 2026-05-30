@@ -1,6 +1,24 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <rect width="64" height="64" rx="12" fill="#0D1A0D"/>
-  <path d="M10 48 L10 38 L14 32 L14 24 L20 18 L30 16 L38 18 L44 24 L44 30 L40 34 L36 34 L34 38 L38 44 L34 44 L30 38 L28 38 L26 48 Z" fill="#F5A623"/>
-  <circle cx="36" cy="20" r="2" fill="#0D1A0D"/>
-  <path d="M44 24 L54 20 L50 26 Z" fill="#F5A623"/>
+  <!-- Tail -->
+  <path d="M6 46 L18 38 L20 44 Z" fill="#F5A623"/>
+  <!-- Body -->
+  <ellipse cx="28" cy="37" rx="12" ry="10" fill="#F5A623"/>
+  <!-- Neck -->
+  <path d="M36 28 L40 14 L46 15 L44 29 Z" fill="#F5A623"/>
+  <!-- Top of head / upper jaw -->
+  <path d="M38 10 L58 9 L60 15 L38 16 Z" fill="#F5A623"/>
+  <!-- Lower jaw (open mouth) -->
+  <path d="M42 16 L56 17 L53 23 L42 22 Z" fill="#F5A623"/>
+  <!-- Tiny forearm -->
+  <path d="M37 31 L44 36 L42 39 L35 34 Z" fill="#F5A623"/>
+  <!-- Left leg -->
+  <rect x="19" y="45" width="8" height="14" rx="3" fill="#F5A623"/>
+  <!-- Right leg -->
+  <rect x="30" y="45" width="8" height="12" rx="3" fill="#F5A623"/>
+  <!-- Eye -->
+  <circle cx="46" cy="12" r="2.2" fill="#0D1A0D"/>
+  <!-- Teeth hint -->
+  <path d="M50 15 L52 15 L51 18 Z" fill="#0D1A0D" opacity="0.6"/>
+  <path d="M54 15 L56 15 L55 18 Z" fill="#0D1A0D" opacity="0.6"/>
 </svg>
